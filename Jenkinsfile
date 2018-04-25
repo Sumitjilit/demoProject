@@ -3,12 +3,13 @@ pipeline {
   stages {
     stage('Preparation') {
       steps {
-        echo 'It is a preparation step.'
+        echo 'Code is fetched from the repo.'
       }
     }
     stage('Build') {
       steps {
-        echo 'Project will be build here.'
+        sh 'mvn clean package'
+        echo 'Code is compiled and jar file is created.'
       }
     }
     stage('Test') {
@@ -21,5 +22,9 @@ pipeline {
         echo 'Deployment will be done here.'
       }
     }
+  }
+  environment {
+    JAVA_HOME = '/usr/lib/jvm/jdk1.8.0_05'
+    MAVEN_HOME = '/usr/local/apache-maven'
   }
 }
